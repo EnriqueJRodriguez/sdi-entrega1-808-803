@@ -1,11 +1,23 @@
 package com.uniovi.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+@Entity
 public class User {
+	@Id
+	@GeneratedValue
+	private Long id;
+	@Column(unique = true)
 	private String email;
 	private String name;
 	private String lastName;
 	private String role;
 	private String password;
+	@Transient
 	private String passwordConfirm;
 
 	public User(String email, String name, String lastName, String role) {
@@ -14,6 +26,13 @@ public class User {
 		this.name = name;
 		this.lastName = lastName;
 		this.role = role;
+	}
+	
+	public User(String email, String name, String lastName) {
+		super();
+		this.email = email;
+		this.name = name;
+		this.lastName = lastName;
 	}
 
 	public User() {
@@ -66,6 +85,14 @@ public class User {
 
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
