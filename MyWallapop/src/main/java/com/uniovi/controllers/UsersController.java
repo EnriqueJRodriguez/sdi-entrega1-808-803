@@ -44,7 +44,7 @@ public class UsersController {
 	public String getListado(Model model) {
 		List<String> users = new ArrayList<String>();
 		usersService.getUsers().forEach((user) -> users.add(user.getData()));
-		model.addAttribute("currentUsers", users);
+		model.addAttribute("currentUsers", usersService.getUsers());
 		model.addAttribute("usersToRemove", new UsersBean());
 		return "user/list";
 	}
@@ -57,8 +57,8 @@ public class UsersController {
 
 	@RequestMapping(value = "/user/delete", method = RequestMethod.POST)
 	public String deleteUsers(@ModelAttribute("usersToRemove") UsersBean usersToRemove) {
-		usersToRemove.getUsers().forEach((userData) -> {
-			String email = userData.substring(userData.indexOf("(") + 1, userData.indexOf(")"));
+		usersToRemove.getUsers().forEach((email) -> {
+			//String email = userData.substring(userData.indexOf("(") + 1, userData.indexOf(")"));
 			User user = usersService.getUserByEmail(email);
 			usersService.deleteUser(user.getId());
 		});

@@ -14,16 +14,22 @@
 					<thead>
 						<tr>
 							<th th:text="#{User.list.name}"></th>
+							<th th:text="#{User.list.surname}"></th>
+							<th th:text="#{User.list.email}"></th>
+							<th class="col-md-1"></th>
 						</tr>
 					</thead>
 					<tbody th:id="users">
 						<tr th:each="user : ${currentUsers}">
-							<td ><input type="checkbox"
-								th:field="*{users}" th:value="${user}" /> <label
-								th:text="${user}"></label></td>
+							<td><label th:text="${user.name}"></label></td>
+							<td><label th:text="${user.lastName}"></label></td>
+							<td><label th:text="${user.email}"></label></td>
+							<td><input type="checkbox" th:field="*{users}"
+								th:value="${user.email}" /></td>
 						</tr>
 						<tr>
-							<td colspan="2"><input type="submit" value="#{User.list.delete}" /></td>
+							<td colspan="2"><button type="submit"
+									class="btn btn-primary" th:text="#{User.list.delete}"></button> </td>
 					</tbody>
 				</table>
 			</form>
