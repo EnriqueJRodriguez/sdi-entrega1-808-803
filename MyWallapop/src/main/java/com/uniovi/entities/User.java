@@ -27,7 +27,7 @@ public class User {
 		this.lastName = lastName;
 		this.role = role;
 	}
-	
+
 	public User(String email, String name, String lastName) {
 		super();
 		this.email = email;
@@ -93,6 +93,10 @@ public class User {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getData() {
+		return name + " " + lastName + " (" + email + ")";
 	}
 
 }

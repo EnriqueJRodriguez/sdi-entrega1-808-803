@@ -1,5 +1,6 @@
 package com.uniovi.controllers;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uniovi.entities.User;
+import com.uniovi.entities.UsersBean;
 import com.uniovi.services.RolesService;
 import com.uniovi.services.SecurityService;
 import com.uniovi.services.UserService;
@@ -40,8 +42,10 @@ public class UsersController {
 	 */
 	@RequestMapping("/user/list")
 	public String getListado(Model model) {
-		model.addAttribute("usersList", usersService.getUsers());
-		model.addAttribute("usersToRemove", new LinkedList<Long>());
+		List<String> users = new ArrayList<String>();
+		usersService.getUsers().forEach((user) -> users.add(user.getData()));
+		model.addAttribute("currentUsers", users);
+		model.addAttribute("usersToRemove", new UsersBean());
 		return "user/list";
 	}
 
@@ -51,10 +55,14 @@ public class UsersController {
 		return "redirect:/user/list";
 	}
 
-	@RequestMapping(value = "/user/delete", method = RequestMethod.GET)
-	public String deleteUsers(@ModelAttribute("usersToRemove") LinkedList<Long> usersToRemove) {
-		usersToRemove.forEach((user) -> usersService.deleteUser(user));
-		return "/user/list";
+	@RequestMapping(value = "/user/delete", method = RequestMethod.POST)
+	public String deleteUsers(@ModelAttribute("usersToRemove") UsersBean usersToRemove) {
+		usersToRemove.getUsers().forEach((userData) -> {
+			String email = userData.substring(userData.indexOf("(") + 1, userData.indexOf(")"));
+			User user = usersService.getUserByEmail(email);
+			usersService.deleteUser(user.getId());
+		});
+		return "redirect:/user/list";
 	}
 
 	@RequestMapping("/user/details/{id}")

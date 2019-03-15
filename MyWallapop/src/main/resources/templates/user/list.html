@@ -8,48 +8,26 @@
 		<h2 th:text="#{User.list.title}"></h2>
 		<p th:text="#{User.list.subtitle}"></p>
 		<div class="table-responsive">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th th:text="#{User.list.email}"></th>
-						<th th:text="#{User.list.name}"></th>
-						<th th:text="#{User.list.surname}"></th>
-						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="user : ${usersList}">
-						<td th:text="${user.email}"></td>
-						<td th:text="${user.name}"></td>
-						<td th:text="${user.lastName}"></td>
-						<td><input type="checkbox"
-							th:id="${'deleteCheckbox' + user.id}" /> <script
-								th:inline="javascript">
-										/*<![CDATA[*/
-											$("#deleteCheckbox[[${user.id}]]").click(function() {
-												var users = [[${usersToRemove}]];
-												if(document.getElementById("deleteCheckbox[[${user.id}]]").checked){}
-													usersToRemove.add([[${user.id}]]);
-												}else{
-													usersToRemove.remove([[${user.id}]]);
-												}
-										});/*]]>*/
-									</script></td>
-					</tr>
-				</tbody>
-			</table>
+			<form method="POST" action="/user/delete"
+				th:object="${usersToRemove}">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th th:text="#{User.list.name}"></th>
+						</tr>
+					</thead>
+					<tbody th:id="users">
+						<tr th:each="user : ${currentUsers}">
+							<td ><input type="checkbox"
+								th:field="*{users}" th:value="${user}" /> <label
+								th:text="${user}"></label></td>
+						</tr>
+						<tr>
+							<td colspan="2"><input type="submit" value="#{User.list.delete}" /></td>
+					</tbody>
+				</table>
+			</form>
 		</div>
-
-		<div>
-			<button type="button" th:id="removeAll" class="btn btn-default"
-				onclick="location.href='/user/delete'" th:text="#{User.list.delete}"></button>
-		</div>
-	</div>
-	</td>
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>
