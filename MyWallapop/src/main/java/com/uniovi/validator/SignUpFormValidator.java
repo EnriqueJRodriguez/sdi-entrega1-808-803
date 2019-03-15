@@ -24,10 +24,10 @@ public class SignUpFormValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
 		// None of the fields is empty
-		ValidationUtils.rejectIfEmpty(errors, "email", "Error.signup.email.empty");
-		ValidationUtils.rejectIfEmpty(errors, "name", "Error.signup.name.empty");
-		ValidationUtils.rejectIfEmpty(errors, "surname", "Error.signup.surname.empty");
-		ValidationUtils.rejectIfEmpty(errors, "password", "Error.signup.password.empty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "Error.signup.email.empty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "Error.signup.name.empty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "Error.signup.lastName.empty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Error.signup.password.empty");
 
 		// Check the requirements for the various fields
 		checkEmail(user, errors);
@@ -39,7 +39,7 @@ public class SignUpFormValidator implements Validator {
 
 	private void checkEmail(User user, Errors errors) {
 		if (usersService.getUserByEmail(user.getEmail()) != null) {
-			errors.rejectValue("email", "Error.signup.dni.duplicate");
+			errors.rejectValue("email", "Error.signup.email.duplicate");
 		}
 	}
 
@@ -51,14 +51,17 @@ public class SignUpFormValidator implements Validator {
 
 	private void checkSurname(User user, Errors errors) {
 		if (user.getLastName().length() < 5 || user.getLastName().length() > 24) {
-			errors.rejectValue("name", "Error.signup.surname.length");
+			errors.rejectValue("lastName", "Error.signup.surname.length");
 		}
 
 	}
 
 	private void checkPassword(User user, Errors errors) {
 		if (user.getPassword().length() < 5 || user.getPassword().length() > 24) {
-			errors.rejectValue("name", "Error.signup.password.length");
+			errors.rejectValue("password", "Error.signup.password.length");
+		}
+		if(!user.getPassword().equals(user.getPasswordConfirm())) {
+			errors.rejectValue("password", "Error.signup.password.confirm");
 		}
 
 	}
