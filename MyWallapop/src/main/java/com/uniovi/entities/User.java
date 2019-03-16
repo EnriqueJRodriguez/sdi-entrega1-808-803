@@ -19,6 +19,7 @@ public class User {
 	private String password;
 	@Transient
 	private String passwordConfirm;
+	private double balance;
 
 	public User(String email, String name, String lastName, String role) {
 		super();
@@ -33,6 +34,7 @@ public class User {
 		this.email = email;
 		this.name = name;
 		this.lastName = lastName;
+		this.balance = 0.0;
 	}
 
 	public User() {
@@ -97,6 +99,14 @@ public class User {
 
 	public String getData() {
 		return name + " " + lastName + " (" + email + ")";
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 
 }
