@@ -10,6 +10,9 @@
 			<img src="/img/student-48.png" alt="logo" />
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav navbar-left">
+				<li><a href="/product/list">Listar productos</a></li>
+			</ul>
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
 				<li id="users-menu" class="dropdown"
 					sec:authorize="hasRole('ROLE_ADMIN')"><a

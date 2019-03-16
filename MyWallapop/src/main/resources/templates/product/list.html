@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>MyWallapop</title>
-<meta charset="utf-8" />
-</head>
+<head th:replace="fragments/head" />
 <body>
 	<div class="container">
 		<h1>List Products</h1>
 		<div th:each="product : ${productList}">
 			<p>
 				<span th:text="${product.id}"></span> <span
-					th:text="${product.description}"></span> <span th:text="${product.price}"></span>
-				<a th:href="${'/product/details/' + product.id}">details</a> <a
+					th:text="${product.description}"></span> <span
+					th:text="${product.price}"></span> <a
+					th:href="${'/product/details/' + product.id}">details</a> <a
 					th:href="${'/product/delete/' + product.id}">delete</a>
 			</p>
 		</div>
 		<div th:if="${#lists.isEmpty(productList)}">No products</div>
 	</div>
+	<footer th:replace="fragments/footer" />
 </body>
 </html>
