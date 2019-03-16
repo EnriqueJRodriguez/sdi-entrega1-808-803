@@ -3,6 +3,7 @@ package com.uniovi.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
 @Entity
 public class Product {
@@ -12,6 +13,8 @@ public class Product {
 	private Long id;
 	private String description;
 	private Double price;
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	public Product(Long id, String description, Double price) {
 		super();
