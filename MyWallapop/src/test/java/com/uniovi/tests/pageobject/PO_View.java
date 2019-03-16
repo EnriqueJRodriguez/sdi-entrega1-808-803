@@ -1,5 +1,7 @@
 package com.uniovi.tests.pageobject;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -8,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import com.uniovi.tests.util.SeleniumUtils;
 
 public class PO_View {
-	
+
 	protected static PO_Properties p = new PO_Properties("messages");
 	protected static int timeout = 2;
 
@@ -27,28 +29,52 @@ public class PO_View {
 	public static void setP(PO_Properties p) {
 		PO_View.p = p;
 	}
-	
+
 	/**
-	 * Espera por la visibilidad de un texto correspondiente a la propiedad key en el idioma locale en la vista actualmente cargandose en driver..
+	 * Espera por la visibilidad de un texto correspondiente a la propiedad key en
+	 * el idioma locale en la vista actualmente cargandose en driver..
+	 * 
 	 * @param driver: apuntando al navegador abierto actualmente.
 	 * @param key: clave del archivo de propiedades.
-	 * @param locale: Retorna el índice correspondient al idioma. 0 p.SPANISH y 1 p.ENGLISH.
+	 * @param locale: Retorna el índice correspondient al idioma. 0 p.SPANISH y 1
+	 *        p.ENGLISH.
 	 * @return Se retornará la lista de elementos resultantes de la búsqueda.
 	 */
 	static public List<WebElement> checkKey(WebDriver driver, String key, int locale) {
-		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "text", p.getString(key, locale), getTimeout());
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "text", p.getString(key, locale),
+				getTimeout());
 		return elementos;
 	}
+
 	/**
-	 *  Espera por la visibilidad de un elemento/s en la vista actualmente cargandose en driver..
+	 * Espera por la visibilidad de un elemento/s en la vista actualmente cargandose
+	 * en driver..
 	 * 
 	 * @param driver: apuntando al navegador abierto actualmente.
-	 * @param type: 
+	 * @param type:
 	 * @param text:
 	 * @return Se retornará la lista de elementos resultantes de la búsqueda.
 	 */
 	static public List<WebElement> checkElement(WebDriver driver, String type, String text) {
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, type, text, getTimeout());
-		return elementos;		
+		return elementos;
+	}
+
+	/***
+	 * CLicka una delas opciones principales(a href) y comprueba que se vaya a la
+	 * vista con el elemento de tipo type con el textoDestino* @paramdriver:
+	 * apuntando al navegador abierto actualmente.* @paramtextOption: Texto de la
+	 * opción principal.* @paramcriterio: "id" or "class" or "text" or "@attribute"
+	 * or "free". Siel valor decriterioesfree es una expresion xpath completa.
+	 * * @paramtextoDestino: texto correspondiente a la bús queda de la página
+	 * destino.
+	 */
+	public static void clickOption(WebDriver driver, String textOption, String criterio, String textoDestino) {
+		// CLickamos enlaopciónderegistroy esperamosa quesecargueel enlacedeRegistro.
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "@href", textOption, getTimeout());// Tienequehaberunsóloelemento.
+		assertTrue(elementos.size() == 1);// Ahoraloclickamos
+		elementos.get(0).click();// Esperamosa quesea visible unelementoconcreto
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, criterio, textoDestino, getTimeout());// Tienequehaberunsóloelemento.
+		assertTrue(elementos.size() == 1);
 	}
 }
