@@ -1,9 +1,12 @@
 package com.uniovi.entities;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Product {
@@ -11,14 +14,19 @@ public class Product {
 	@Id
 	@GeneratedValue
 	private Long id;
+	private String title;
 	private String description;
 	private Double price;
-	@JoinColumn(name = "user_id")
-	private User user;
+	@ManyToOne@JoinColumn(name = "owner_id")
+	private User owner;
+	private Date date;
+	@ManyToOne@JoinColumn(name = "buyer_id")
+	private User buyer;
 
-	public Product(Long id, String description, Double price) {
+	public Product(Long id,String title, String description, Double price) {
 		super();
 		this.id = id;
+		this.title = title;
 		this.description = description;
 		this.price = price;
 	}
@@ -55,13 +63,39 @@ public class Product {
 		this.price = price;
 	}
 
-	public User getUser() {
-		return user;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setTitle(String title) {
+		this.title = title;
 	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public User getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(User buyer) {
+		this.buyer = buyer;
+	}
+
+	
 	
 	
 

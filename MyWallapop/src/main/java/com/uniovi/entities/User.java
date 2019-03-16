@@ -24,9 +24,9 @@ public class User {
 	@Transient
 	private String passwordConfirm;
 	private double balance;
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
 	private Set<Product> purchases;
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
 	private Set<Product> offers;
 
 	public User(String email, String name, String lastName, String role) {
