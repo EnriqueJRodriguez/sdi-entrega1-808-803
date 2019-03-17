@@ -49,16 +49,20 @@ public class InsertSampleDataService {
 		user2.setRole(rolesService.getRoles()[0]);
 		User user3 = new User("alb@uniovi.es", "María", "Rodríguez");
 		user3.setPassword("123456");
+		user3.setBalance(5000);
 		user3.setRole(rolesService.getRoles()[0]);
 		User user4 = new User("odo@gmail.com", "Marta", "Almonte");
 		user4.setPassword("123456");
 		user4.setRole(rolesService.getRoles()[0]);
+		user4.setBalance(5000);
 		User user5 = new User("admin@email.com", "Pelayo", "Valdes");
 		user5.setPassword("123456");
 		user5.setRole(rolesService.getRoles()[1]);
+		user5.setBalance(5000);
 		User user6 = new User("ededdedy@hotmail.com", "Edward", "Núñez");
 		user6.setPassword("123456");
 		user6.setRole(rolesService.getRoles()[0]);
+		user6.setBalance(5000);
 
 		Product pr1 = new Product("Cigarrillo electrónico", "Cigarrillo electrónico sabor menta", 3.5, new Date());
 		Product pr2 = new Product("Coche", "Opel corsa, semi nuevo", 5000.0, new Date());
@@ -81,6 +85,26 @@ public class InsertSampleDataService {
 		Product pr20 = new Product("RAID de sobremesa", "Me lo monté en una tarde", 3.5, new Date());
 		Product pr21 = new Product("Servidor de nombres", "Solo local, que tampoco somos google", 3.5, new Date());
 
+		Product pr22 = new Product("Secador de pelo", "en buen estado", 3.5, new Date());
+
+		Product pr23 = new Product("Armario", "la pintura está algo ida", 3.5, new Date());
+
+		Product pr24 = new Product("Televisor", "hd ready", 3.5, new Date());
+
+		Product pr25 = new Product("Sofá", "Algo comido por las polillas", 3.5, new Date());
+
+		Product pr26 = new Product("Jarrón Ming", "Así se llamaba la tienda donde lo compré.", 3.5, new Date());
+
+		Product pr27 = new Product("Tierra vegetal", "Ideal para el jardinero", 3.5, new Date());
+
+		Product pr28 = new Product("Teclado IBM", "Para los nostálgicos", 3.5, new Date());
+
+		Product pr29 = new Product("Pipa de maiz", "Siéntase como MCArthur", 3.5, new Date());
+
+		Product pr30 = new Product("Patatas", "Lo que no tenían en Irlanda", 3.5, new Date());
+
+		Product pr31 = new Product("Bandera española", "para amantes de la ornitología", 3.5, new Date());
+
 		usersService.addUser(dummy1);
 		usersService.addUser(dummy2);
 		usersService.addUser(dummy3);
@@ -96,23 +120,45 @@ public class InsertSampleDataService {
 		productsService.addProduct(pr2, user1);
 		productsService.addProduct(pr3, user1);
 		productsService.addProduct(pr4, user1);
-		productsService.addProduct(pr5, user1);
-		productsService.addProduct(pr6, user1);
-		productsService.addProduct(pr7, user1);
-		productsService.addProduct(pr8, user1);
-		productsService.addProduct(pr9, user1);
-		productsService.addProduct(pr10, user1);
-		productsService.addProduct(pr12, user1);
-		productsService.addProduct(pr13, user1);
-		productsService.addProduct(pr14, user1);
-		productsService.addProduct(pr15, user1);
+		productsService.addProduct(pr5, user2);
+		productsService.addProduct(pr6, user2);
+		productsService.addProduct(pr7, user2);
+		productsService.addProduct(pr8, user3);
+		productsService.addProduct(pr9, user3);
+		productsService.addProduct(pr10, user3);
+		productsService.addProduct(pr12, user4);
+		productsService.addProduct(pr13, user4);
+		productsService.addProduct(pr14, user4);
+		productsService.addProduct(pr15, user4);
 		productsService.addProduct(pr16, user1);
 		productsService.addProduct(pr17, user1);
 		productsService.addProduct(pr18, user1);
 		productsService.addProduct(pr19, user1);
 		productsService.addProduct(pr20, user2);
 		productsService.addProduct(pr21, user2);
-		
+
+//		productsService.addProduct(pr22, user6);
+//		productsService.addProduct(pr23, user6);
+//		productsService.addProduct(pr24, user6);
+//		productsService.addProduct(pr25, user6);
+//		productsService.addProduct(pr26, user6);
+//		productsService.addProduct(pr27, user6);
+//		productsService.addProduct(pr28, user6);
+//		productsService.addProduct(pr29, user6);
+//		productsService.addProduct(pr30, user6);
+//		productsService.addProduct(pr31, user6);
+//
+//		productsService.buyProduct(pr22, user1);
+//		productsService.buyProduct(pr23, user2);
+//		productsService.buyProduct(pr24, user2);
+//		productsService.buyProduct(pr25, user3);
+//		productsService.buyProduct(pr26, user3);
+//		productsService.buyProduct(pr27, user4);
+//		productsService.buyProduct(pr28, user4);
+//		productsService.buyProduct(pr29, user5);
+//		productsService.buyProduct(pr30, user5);
+//		productsService.buyProduct(pr31, user6);
+
 		productsService.buyProduct(pr1, user1);
 		productsService.buyProduct(pr2, user1);
 	}
