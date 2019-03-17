@@ -61,12 +61,13 @@ public class PO_View {
 	}
 
 	/***
-	 * CLicka una delas opciones principales(a href) y comprueba que se vaya a la
-	 * vista con el elemento de tipo type con el textoDestino* @paramdriver:
-	 * apuntando al navegador abierto actualmente.* @paramtextOption: Texto de la
-	 * opción principal.* @paramcriterio: "id" or "class" or "text" or "@attribute"
-	 * or "free". Siel valor decriterioesfree es una expresion xpath completa.
-	 * * @paramtextoDestino: texto correspondiente a la bús queda de la página
+	 * Clicka una delas opciones principales(a href) y comprueba que se vaya a la
+	 * vista con el elemento de tipo type con el textoDestino
+	 * @paramdriver: apuntando al navegador abierto actualmente.
+	 * @paramtextOption: Texto de la opción principal.
+	 * @paramcriterio: "id" or "class" or "text" or "@attribute"
+	 * or "free". Si el valor decriterioesfree es una expresion xpath completa.
+	 * @paramtextoDestino: texto correspondiente a la bús queda de la página
 	 * destino.
 	 */
 	public static void clickOption(WebDriver driver, String textOption, String criterio, String textoDestino) {
