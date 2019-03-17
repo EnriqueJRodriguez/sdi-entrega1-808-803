@@ -7,4 +7,4 @@ $(document).ready(function() {
 		window.location.replace('?lang=' + languageSelectedValue);
 		return false;
 	});
-});}
+});
