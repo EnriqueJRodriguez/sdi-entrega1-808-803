@@ -17,6 +17,7 @@ import com.uniovi.tests.pageobject.PO_HomeView;
 import com.uniovi.tests.pageobject.PO_LoginView;
 import com.uniovi.tests.pageobject.PO_Properties;
 import com.uniovi.tests.pageobject.PO_SignupView;
+import com.uniovi.tests.pageobject.PO_UsersView;
 import com.uniovi.tests.pageobject.PO_View;
 import com.uniovi.tests.util.SeleniumUtils;
 
@@ -130,6 +131,38 @@ public class Tests {
 		PO_HomeView.checkKey(driver, "User.4", PO_Properties.getENGLISH());
 		PO_HomeView.checkKey(driver, "User.5", PO_Properties.getENGLISH());
 		PO_HomeView.checkKey(driver, "User.6", PO_Properties.getENGLISH());
+	}
+
+	@Test
+	public void PF05() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "admin@email.com", "123456");
+		PO_HomeView.listUsers(driver);
+		String[] users = { "users1" };
+		PO_UsersView.fillForm(driver, users);
+		try {
+			PO_HomeView.checkKey(driver, "User.1", PO_Properties.getENGLISH());
+		} catch (TimeoutException e) {
+
+		}
+
+		users[0] = "users5";
+		PO_UsersView.fillForm(driver, users);
+		try {
+			PO_HomeView.checkKey(driver, "User.6", PO_Properties.getENGLISH());
+		} catch (TimeoutException e) {
+
+		}
+
+		String[] users2 = { "users1", "users2", "users3" };
+		PO_UsersView.fillForm(driver, users2);
+		try {
+			PO_HomeView.checkKey(driver, "User.2", PO_Properties.getENGLISH());
+			PO_HomeView.checkKey(driver, "User.3", PO_Properties.getENGLISH());
+			PO_HomeView.checkKey(driver, "User.4", PO_Properties.getENGLISH());
+		} catch (TimeoutException e) {
+
+		}
 	}
 
 }

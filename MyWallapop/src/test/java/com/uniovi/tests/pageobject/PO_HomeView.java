@@ -47,7 +47,7 @@ public class PO_HomeView extends PO_View {
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "users-menu", getTimeout());
 		elementos.get(0).click();
 		// Esperamosa queaparezcael menúdeopciones.
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "user-options-list", getTimeout());
+	//	elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "user-options-list", getTimeout());
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "listUsers", getTimeout());
 		elementos.get(0).click();
 	}
