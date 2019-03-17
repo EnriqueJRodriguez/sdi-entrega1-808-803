@@ -57,13 +57,16 @@ public class ProductsController {
 	
 	@RequestMapping("/product/buy/{idt}")
 	public String buyProduct(@PathVariable Long idt) {
-		String email = securityService.findLoggedInEmail(); // Gets session's user identifier
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		// String email = securityService.findLoggedInEmail(); // Gets session's user
+		// identifier
 		User buyer = usersService.getUserByEmail(email);
 		Product p = productsService.getProduct(idt);
-		if(productsService.buyProduct(p,buyer)) {
-			return "redirect:/mark/list/update";
+		if (productsService.buyProduct(p, buyer)) {
+			return "redirect:/product/list";
 		}
-		return "Ok";
+		return "/product/noCash";
 	}
 
 	@RequestMapping("/product/list/update")

@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 public class Product {
 
@@ -22,6 +24,7 @@ public class Product {
 	private Date date;
 	@ManyToOne@JoinColumn(name = "buyer_id")
 	private User buyer;
+	@Type(type= "org.hibernate.type.NumericBooleanType")
 	private boolean sold;
 
 	public Product(String title, String description, Double price, Date date, User owner) {
