@@ -105,7 +105,7 @@ public class Tests {
 	}
 
 	@Test
-	public void PR03() {
+	public void PF03() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "UO12345@uniovi.es", "123456");
 		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
@@ -117,6 +117,19 @@ public class Tests {
 		}
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_View.checkKey(driver, "Login.email", PO_Properties.getSPANISH());
+	}
+
+	@Test
+	public void PF04() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "admin@email.com", "123456");
+		PO_HomeView.listUsers(driver);
+		PO_HomeView.checkKey(driver, "User.1", PO_Properties.getENGLISH());
+		PO_HomeView.checkKey(driver, "User.2", PO_Properties.getENGLISH());
+		PO_HomeView.checkKey(driver, "User.3", PO_Properties.getENGLISH());
+		PO_HomeView.checkKey(driver, "User.4", PO_Properties.getENGLISH());
+		PO_HomeView.checkKey(driver, "User.5", PO_Properties.getENGLISH());
+		PO_HomeView.checkKey(driver, "User.6", PO_Properties.getENGLISH());
 	}
 
 }
