@@ -1,6 +1,5 @@
 package com.uniovi.tests;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.After;
@@ -9,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -19,7 +19,6 @@ import com.uniovi.tests.pageobject.PO_Properties;
 import com.uniovi.tests.pageobject.PO_SignupView;
 import com.uniovi.tests.pageobject.PO_UsersView;
 import com.uniovi.tests.pageobject.PO_View;
-import com.uniovi.tests.util.SeleniumUtils;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Tests {
@@ -164,10 +163,45 @@ public class Tests {
 
 		}
 	}
-	
+
 	@Test
 	public void PF06() {
-		
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "admin@email.com", "123456");
+		PO_HomeView.addOffer(driver);
+		PO_HomeView.checkKey(driver, "Offer.chorizo", PO_Properties.getSPANISH());
+
+	}
+
+	@Test
+	public void PF07() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "ja@uniovi.es", "123456");
+		PO_HomeView.seeMyOffers(driver);
+		PO_HomeView.checkKey(driver, "Offer.raid", PO_Properties.getSPANISH());
+
+	}
+
+	@Test
+	public void PF08() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "ja@uniovi.es", "123456");
+		PO_HomeView.seeMyOffers(driver);
+		By enlace = By.xpath("//td[contains(text(), 'RAID de sobremesa')]/following-sibling::*[3]");
+		driver.findElement(enlace).click();
+		try {
+			PO_HomeView.checkKey(driver, "Offer.raid", PO_Properties.getSPANISH());
+			fail();
+		}catch(TimeoutException e) {
+			
+		}
+		enlace = By.xpath("//td[contains(text(), 'Servidor de nombres')]/following-­sibling::*[3]");
+		driver.findElement(enlace).click();
+		try {
+			PO_HomeView.checkKey(driver, "Offer.names", PO_Properties.getSPANISH());
+		}catch(TimeoutException e) {
+			
+		}
 	}
 
 }

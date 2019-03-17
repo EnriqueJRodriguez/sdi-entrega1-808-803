@@ -52,4 +52,14 @@ public class PO_HomeView extends PO_View {
 		elementos.get(0).click();
 	}
 	
+	public static void addOffer(WebDriver driver) {
+		// clickamoslaopciónIdioma.
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "addProduct", getTimeout());
+		elementos.get(0).click();
+	}
+	public static void seeMyOffers(WebDriver driver) {
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "ListMyOffers", getTimeout());
+		elementos.get(0).click();
+	}
+	
 }

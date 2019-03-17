@@ -49,7 +49,7 @@
 						<td th:text="${product.title}"></td>
 						<td th:text="${product.description}"></td>
 						<td th:text="${product.price}"></td>
-						<td><a th:href="${'/product/remove/' + product.id}" th:text="#{Products.offer.remove}"></span></a></td>
+						<td><a id="${product.title}" th:href="${'/product/remove/' + product.id}" th:text="#{Products.offer.remove}"></span></a></td>
 					</tr>
 				</tbody>
 			</table>

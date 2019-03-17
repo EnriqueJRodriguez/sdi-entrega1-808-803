@@ -10,30 +10,33 @@
 			<img src="/img/logo.png" alt="logo" />
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav navbar-left" sec:authorize="isAuthenticated()">
+			<ul class="nav navbar-nav navbar-left"
+				sec:authorize="isAuthenticated()" id="listProducts">
 				<li><a href="/product/list">Listar productos</a></li>
 			</ul>
-			<ul class="nav navbar-nav navbar-left" sec:authorize="isAuthenticated()">
+			<ul class="nav navbar-nav navbar-left"
+				sec:authorize="isAuthenticated()" id="listPurchases">
 				<li><a href="/product/purchase">Mis compras</a></li>
 			</ul>
-			<ul class="nav navbar-nav navbar-left" sec:authorize="isAuthenticated()">
+			<ul class="nav navbar-nav navbar-left"
+				sec:authorize="isAuthenticated()" id="ListMyOffers">
 				<li><a href="/product/offer">Mis ofertas</a></li>
 			</ul>
-			<ul class="nav navbar-nav navbar-left" sec:authorize="isAuthenticated()">
+			<ul class="nav navbar-nav navbar-left"
+				sec:authorize="isAuthenticated()" id="addProduct">
 				<li><a href="/product/add">Añadir producto</a></li>
 			</ul>
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
 				<li id="users-menu" class="dropdown"
-					sec:authorize="hasRole('ROLE_ADMIN')">
-					<a
+					sec:authorize="hasRole('ROLE_ADMIN')"><a
 					class="dropdown-toggle" data-toggle="dropdown" href="#"
 					th:text="#{Menu.users}"> <span class="caret"></span>
-					</a>
+				</a>
 					<ul id="user-options-list" class="dropdown-menu">
 						<li><a href="/user/add" th:text="#{User.add.title}"></a></li>
-						<li><a id="listUsers" href="/user/list" th:text="#{User.list.title}"></a></li>
-					</ul>
-				</li>
+						<li><a id="listUsers" href="/user/list"
+							th:text="#{User.list.title}"></a></li>
+					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a id="btnLanguage" href="#"
