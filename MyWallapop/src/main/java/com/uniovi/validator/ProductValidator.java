@@ -1,5 +1,7 @@
 package com.uniovi.validator;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -43,8 +45,9 @@ public class ProductValidator implements Validator {
 	}
 
 	private void checkPrice(Product product, Errors errors) {
-		if (product.getPrice() <= 0.01) {
+		if (product.getPrice() < 0.01) {
 			errors.rejectValue("price", "Error.add.price");
 		}
 	}
+	
 }
