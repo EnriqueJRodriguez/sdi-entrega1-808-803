@@ -42,6 +42,15 @@ public class UsersController {
 	 */
 	@RequestMapping("/user/list")
 	public String getListado(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null) {
+			return "redirect:/login";
+		}
+		String email2 = auth.getName();
+		User user2 = usersService.getUserByEmail(email2);
+		if(user2.getRole().equals("ROLE_CUSTOMER")) {
+			return "redirect:/login";
+		}
 		List<String> users = new ArrayList<String>();
 		usersService.getUsers().forEach((user) -> users.add(user.getData()));
 		model.addAttribute("currentUsers", usersService.getUsers());
@@ -51,12 +60,30 @@ public class UsersController {
 
 	@RequestMapping(value = "/user/add", method = RequestMethod.POST)
 	public String setUser(@ModelAttribute User user) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null) {
+			return "redirect:/login";
+		}
+		String email2 = auth.getName();
+		User user2 = usersService.getUserByEmail(email2);
+		if(user2.getRole().equals("ROLE_CUSTOMER")) {
+			return "redirect:/login";
+		}
 		usersService.addUser(user);
 		return "redirect:/user/list";
 	}
 
 	@RequestMapping(value = "/user/delete", method = RequestMethod.POST)
 	public String deleteUsers(@ModelAttribute("usersToRemove") UsersBean usersToRemove) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null) {
+			return "redirect:/login";
+		}
+		String email2 = auth.getName();
+		User user2 = usersService.getUserByEmail(email2);
+		if(user2.getRole().equals("ROLE_CUSTOMER")) {
+			return "redirect:/login";
+		}
 		usersToRemove.getUsers().forEach((email) -> {
 			// String email = userData.substring(userData.indexOf("(") + 1,
 			// userData.indexOf(")"));
@@ -68,18 +95,45 @@ public class UsersController {
 
 	@RequestMapping("/user/details/{id}")
 	public String getDetail(Model model, @PathVariable Long id) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null) {
+			return "redirect:/login";
+		}
+		String email2 = auth.getName();
+		User user2 = usersService.getUserByEmail(email2);
+		if(user2.getRole().equals("ROLE_CUSTOMER")) {
+			return "redirect:/login";
+		}
 		model.addAttribute("user", usersService.getUser(id));
 		return "user/details";
 	}
 
 	@RequestMapping("/user/delete/{id}")
 	public String delete(@PathVariable Long id) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null) {
+			return "redirect:/login";
+		}
+		String email = auth.getName();
+		User user = usersService.getUserByEmail(email);
+		if(user.getRole().equals("ROLE_CUSTOMER")) {
+			return "redirect:/login";
+		}
 		usersService.deleteUser(id);
 		return "redirect:/user/list";
 	}
 
 	@RequestMapping(value = "/user/edit/{id}")
 	public String getEdit(Model model, @PathVariable Long id) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null) {
+			return "redirect:/login";
+		}
+		String email2 = auth.getName();
+		User user2 = usersService.getUserByEmail(email2);
+		if(user2.getRole().equals("ROLE_CUSTOMER")) {
+			return "redirect:/login";
+		}
 		User user = usersService.getUser(id);
 		model.addAttribute("user", user);
 		return "user/edit";
@@ -87,6 +141,15 @@ public class UsersController {
 
 	@RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
 	public String setEdit(Model model, @PathVariable Long id, @ModelAttribute User user) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null) {
+			return "redirect:/login";
+		}
+		String email2 = auth.getName();
+		User user2 = usersService.getUserByEmail(email2);
+		if(user2.getRole().equals("ROLE_CUSTOMER")) {
+			return "redirect:/login";
+		}
 		user.setId(id);
 		usersService.addUser(user);
 		return "redirect:/user/details/" + id;

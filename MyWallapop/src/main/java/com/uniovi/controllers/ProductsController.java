@@ -109,6 +109,9 @@ public class ProductsController {
 	@RequestMapping("/product/offer/update")
 	public String updateOffer(Model model, Pageable pageable, Principal principal) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null) {
+			return "redirect:/login";
+		}
 		String email = auth.getName();
 		Page<Product> products = productsService.getAllOffers(pageable, email);
 		model.addAttribute("productList", products.getContent());
@@ -138,6 +141,9 @@ public class ProductsController {
 //		String email = principal.getName();
 //		User user = usersService.getUserByEmail(email);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null) {
+			return "redirect:/login";
+		}
 		String email = auth.getName();
 		Page<Product> products = new PageImpl<Product>(new LinkedList<Product>());
 		if (searchText != null && !searchText.isEmpty()) {
