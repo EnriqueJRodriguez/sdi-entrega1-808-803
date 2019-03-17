@@ -40,7 +40,6 @@ public class ProductsService {
 		}
 		product.setOwner(owner);
 		owner.getOffers().add(product);
-		usersRepository.save(owner);
 		productsRepository.save(product);
 	}
 
