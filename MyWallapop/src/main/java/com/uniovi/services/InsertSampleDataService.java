@@ -42,6 +42,7 @@ public class InsertSampleDataService {
 		User user1 = new User("UO12345@uniovi.es", "Pedro", "Díaz");
 		user1.setPassword("123456");
 		user1.setRole(rolesService.getRoles()[0]);
+		user1.setBalance(10000);
 		User user2 = new User("ja@uniovi.es", "Lucas", "Núñez");
 		user2.setPassword("123456");
 		user2.setBalance(10000);
@@ -60,8 +61,8 @@ public class InsertSampleDataService {
 		user6.setRole(rolesService.getRoles()[0]);
 
 		Product pr1 = new Product("Cigarrillo electrónico", "Cigarrillo electrónico sabor menta", 3.5, new Date());
-		Product pr2 = new Product("Coche", "Opel corsa, semi nuevo", 3.5, new Date());
-		Product pr3 = new Product("Avión", "Bombardero stuka, de colección", 3.5, new Date());
+		Product pr2 = new Product("Coche", "Opel corsa, semi nuevo", 5000.0, new Date());
+		Product pr3 = new Product("Avion", "Bombardero stuka, de colección", 5000.0, new Date());
 		Product pr4 = new Product("Repollos", "Recién salidos de la huerta", 3.5, new Date());
 		Product pr5 = new Product("Malvadiscos", "Como el malo de cazafantasmas", 3.5, new Date());
 		Product pr6 = new Product("Disco de estopa", "El de la raja de tu falda", 3.5, new Date());
@@ -111,5 +112,8 @@ public class InsertSampleDataService {
 		productsService.addProduct(pr19, user1);
 		productsService.addProduct(pr20, user2);
 		productsService.addProduct(pr21, user2);
+		
+		productsService.buyProduct(pr1, user1);
+		productsService.buyProduct(pr2, user1);
 	}
 }

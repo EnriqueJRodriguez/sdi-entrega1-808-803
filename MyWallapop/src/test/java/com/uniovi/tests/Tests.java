@@ -215,32 +215,72 @@ public class Tests {
 		assertTrue(PO_OfferView.getElements(driver) > 0);
 		PO_OfferView.search(driver, "somier");
 		try {
-		PO_OfferView.getElements(driver);
-		fail();
-		}catch(TimeoutException e) {
-			
+			PO_OfferView.getElements(driver);
+			fail();
+		} catch (TimeoutException e) {
+
 		}
 
 	}
-	
+
 	@Test
-	public void PF10() {
+	public void PF10_1() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "ja@uniovi.es", "123456");
 		PO_HomeView.seeOffers(driver);
 		PO_OfferView.search(driver, "Coche");
-		By enlace = By.xpath("//td[contains(text(), 'RAID de sobremesa')]/following-sibling::*[]");
+		By enlace = By.xpath("//td[contains(text(), 'Coche')]/following-sibling::*[5]");
 		driver.findElement(enlace).click();
-		PO_OfferView.search(driver, "somier");
-		try {
-		PO_OfferView.getElements(driver);
-		fail();
-		}catch(TimeoutException e) {
-			
-		}
+		driver.navigate().to("http://localhost:8090/home");
+		PO_HomeView.checkKey(driver, "Home.myBalance1", PO_Properties.getSPANISH());
+	}
+
+	@Test
+	public void PF10_2() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "ja@uniovi.es", "123456");
+		PO_HomeView.seeOffers(driver);
+		PO_OfferView.search(driver, "Avion");
+		By enlace = By.xpath("//td[contains(text(), 'Avion')]/following-sibling::*[5]");
+		driver.findElement(enlace).click();
+		driver.navigate().to("http://localhost:8090/home");
+		PO_HomeView.checkKey(driver, "Home.myBalance2", PO_Properties.getSPANISH());
+	}
+
+	@Test
+	public void PF10_3() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "ja@uniovi.es", "123456");
+		PO_HomeView.seeOffers(driver);
+		PO_OfferView.search(driver, "Pluma");
+		By enlace = By.xpath("//td[contains(text(), 'Pluma')]/following-sibling::*[5]");
+		driver.findElement(enlace).click();
+		PO_HomeView.checkKey(driver, "Products.noCash.title", PO_Properties.getSPANISH());
+	}
+
+	@Test
+	public void PF011() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "UO12345@uniovi.es", "123456");
+		PO_HomeView.seeMyPurchases(driver);
+		By enlace = By.xpath("//td[contains(text(), 'Cigarrillo electrónico')]/following-sibling::*[3]");
+		driver.findElement(enlace).click();
+
+		PO_HomeView.checkKey(driver, "Purchase.cigarrilo", PO_Properties.getSPANISH());
+
+		enlace = By.xpath("//td[contains(text(), 'Coche')]/following-sibling::*[3]");
+		driver.findElement(enlace).click();
+		PO_HomeView.checkKey(driver, "Purchase.coche", PO_Properties.getSPANISH());
 
 	}
-	
-	
+
+	@Test
+	public void PF12() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "admin@email.com", "123456");
+		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish", PO_Properties.getSPANISH(),
+				PO_Properties.getENGLISH());
+		
+	}
 
 }

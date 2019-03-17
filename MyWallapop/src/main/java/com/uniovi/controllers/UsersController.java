@@ -58,7 +58,8 @@ public class UsersController {
 	@RequestMapping(value = "/user/delete", method = RequestMethod.POST)
 	public String deleteUsers(@ModelAttribute("usersToRemove") UsersBean usersToRemove) {
 		usersToRemove.getUsers().forEach((email) -> {
-			//String email = userData.substring(userData.indexOf("(") + 1, userData.indexOf(")"));
+			// String email = userData.substring(userData.indexOf("(") + 1,
+			// userData.indexOf(")"));
 			User user = usersService.getUserByEmail(email);
 			usersService.deleteUser(user.getId());
 		});
@@ -117,9 +118,12 @@ public class UsersController {
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null) {
+			return "redirect:/login";
+		}
 		String email = auth.getName();
 		User user = usersService.getUserByEmail(email);
-		model.addAttribute("user",user);
+		model.addAttribute("user", user);
 		return "home";
 	}
 }
