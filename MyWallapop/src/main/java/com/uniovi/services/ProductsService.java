@@ -40,8 +40,10 @@ public class ProductsService {
 		productsRepository.save(product);
 	}
 
-	public void deleteProduct(Long id) {
-		productsRepository.deleteById(id);
+	public void deleteProduct(Long id, String email) {
+		if(getProduct(id).getOwner().getEmail().equals(email)) {
+			productsRepository.deleteById(id);
+		}
 	}
 	
 	public Page<Product> getAllProducts(Pageable pageable) {
@@ -85,6 +87,20 @@ public class ProductsService {
 			return true;
 		}
 		return false;
+	}
+
+	public Page<Product> getAllOffers(Pageable pageable, String email) {
+		return productsRepository.searchAllOffers(pageable,email);
+	}
+
+	public Page<Product> getOffersByTitle(Pageable pageable, String searchText, String email) {
+		searchText = "%" + searchText + "%";
+		if (searchText.isEmpty() && searchText != null) {
+			return getAllOffers(pageable, email);
+		}
+		else {
+			return productsRepository.searchOfferByTitle(pageable, searchText,email);
+		}
 	}
 	
 }
