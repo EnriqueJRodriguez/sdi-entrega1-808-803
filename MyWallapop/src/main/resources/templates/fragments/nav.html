@@ -19,6 +19,9 @@
 			<ul class="nav navbar-nav navbar-left" sec:authorize="isAuthenticated()">
 				<li><a href="/product/offer">Mis ofertas</a></li>
 			</ul>
+			<ul class="nav navbar-nav navbar-left" sec:authorize="isAuthenticated()">
+				<li><a href="/product/add">Añadir producto</a></li>
+			</ul>
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
 				<li id="users-menu" class="dropdown"
 					sec:authorize="hasRole('ROLE_ADMIN')"><a

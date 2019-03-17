@@ -36,6 +36,15 @@ public class Product {
 		this.owner = owner;
 		this.sold = false;
 	}
+	
+	public Product(String title, String description, Double price, Date date) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.price = price;
+		this.date = date;
+		this.sold = false;
+	}
 
 	public Product() {
 	}

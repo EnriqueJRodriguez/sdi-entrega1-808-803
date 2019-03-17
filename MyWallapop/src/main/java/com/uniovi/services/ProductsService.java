@@ -33,14 +33,14 @@ public class ProductsService {
 		return productsRepository.findById(id).get();
 	}
 
-	public void addProduct(Product product, String email) {
+	public void addProduct(Product product, User owner) {
 		// If the id is null we assign the last +1 position on the list
 		if(product.getDate() == null) {
 			product.setDate(new Date());
 		}
-		User u = usersRepository.findByEmail(email);
-		u.getOffers().add(product);
-		usersRepository.save(u);
+		product.setOwner(owner);
+		owner.getOffers().add(product);
+		usersRepository.save(owner);
 		productsRepository.save(product);
 	}
 
