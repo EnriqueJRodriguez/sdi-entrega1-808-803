@@ -1,10 +1,10 @@
 $(document).ready(function() {
 	$("#languageDropdownMenuButton a").click(function(e) {
-		e.preventDefault(); // cancel the link behaviourvarlanguage
-		SelectedText = $(this).text();
-		varlanguageSelectedValue = $(this).attr("value");
+		e.preventDefault(); // cancel the link behaviour
+		var languageSelectedText = $(this).text();
+		var languageSelectedValue = $(this).attr("value");
 		$("#btnLanguage").text(languageSelectedText);
 		window.location.replace('?lang=' + languageSelectedValue);
-		returnfalse;
+		return false;
 	});
 });}
