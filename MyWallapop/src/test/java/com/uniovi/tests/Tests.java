@@ -147,10 +147,10 @@ public class Tests {
 
 		}
 
-		users[0] = "users10";
+		users[0] = "users9";
 		PO_UsersView.fillForm(driver, users);
 		try {
-			PO_HomeView.checkKey(driver, "User.10", PO_Properties.getSPANISH());
+			PO_HomeView.checkKey(driver, "User.6", PO_Properties.getSPANISH());
 		} catch (TimeoutException e) {
 
 		}
@@ -280,7 +280,24 @@ public class Tests {
 		PO_LoginView.fillForm(driver, "admin@email.com", "123456");
 		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish", PO_Properties.getSPANISH(),
 				PO_Properties.getENGLISH());
-		
+
+	}
+
+	@Test
+	public void PF13() {
+		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+		driver.navigate().to("http://localhost:8090/user/list");
+		PO_LoginView.checkKey(driver, "Login.title", PO_Properties.getSPANISH());
+		driver.navigate().to("http://localhost:8090/product/purchase");
+		PO_LoginView.checkKey(driver, "Login.title", PO_Properties.getSPANISH());
+		PO_LoginView.fillForm(driver, "UO12345@uniovi.es", "123456");
+		driver.navigate().to("http://localhost:8090/user/list");
+		try {
+			PO_LoginView.checkKey(driver, "User.list.title", PO_Properties.getSPANISH());
+			fail();
+		}catch(TimeoutException e){
+			
+		}
 	}
 
 }
