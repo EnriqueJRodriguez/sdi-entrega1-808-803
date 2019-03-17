@@ -36,22 +36,23 @@
 				id="tableProducts">
 				<thead>
 					<tr>
-						<th class="col-md-1">Id</th>
 						<th class="col-md-1">Title</th>
 						<th class="col-md-1">Description</th>
 						<th class="col-md-1">Price</th>
 						<th class="col-md-1">Date</th>
 						<th class="col-md-1">User</th>
+						<th class="col-md-1"></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="product : ${productList}">
-						<td th:text="${product.id}"></td>
 						<td th:text="${product.title}"></td>
 						<td th:text="${product.description}"></td>
 						<td th:text="${product.price}"></td>
 						<td th:text="${product.date}"></td>
 						<td th:text="${product.owner.email}"></td>
+						<td><a th:href="${'/product/buy/' + product.id}">Buy</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

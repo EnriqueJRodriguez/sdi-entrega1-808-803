@@ -22,6 +22,7 @@ public class Product {
 	private Date date;
 	@ManyToOne@JoinColumn(name = "buyer_id")
 	private User buyer;
+	private boolean sold;
 
 	public Product(String title, String description, Double price, Date date, User owner) {
 		super();
@@ -30,6 +31,7 @@ public class Product {
 		this.price = price;
 		this.date = date;
 		this.owner = owner;
+		this.sold = false;
 	}
 
 	public Product() {
@@ -99,8 +101,12 @@ public class Product {
 		this.buyer = buyer;
 	}
 
-	
-	
-	
+	public boolean isSold() {
+		return sold;
+	}
+
+	public void setSold(boolean sold) {
+		this.sold = sold;
+	}
 
 }

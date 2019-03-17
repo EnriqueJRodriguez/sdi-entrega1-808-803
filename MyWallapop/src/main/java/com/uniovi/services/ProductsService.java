@@ -3,6 +3,7 @@ package com.uniovi.services;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,6 +52,17 @@ public class ProductsService {
 		else {
 			return productsRepository.searchProductByTitle(pageable, searchText);
 		}
+	}
+
+	public boolean buyProduct(Product p, User buyer) {
+		if(p.getPrice() <= buyer.getBalance()) {
+			p.getOwner().setBalance(p.getOwner().getBalance() + p.getPrice());
+			buyer.setBalance(buyer.getBalance() - p.getPrice());
+			buyer.getPurchases().add(p);
+			p.setSold(true);
+			return true;
+		}
+		return false;
 	}
 	
 }
