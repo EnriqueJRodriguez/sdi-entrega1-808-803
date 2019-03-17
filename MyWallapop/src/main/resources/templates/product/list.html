@@ -51,7 +51,12 @@
 						<td th:text="${product.price}"></td>
 						<td th:text="${product.date}"></td>
 						<td th:text="${product.owner.email}"></td>
-						<td><a th:href="${'/product/buy/' + product.id}">Buy</td>
+						<td>
+							<span th:if="${!product.sold}">
+								<a th:href="${'/product/buy/' + product.id}">Buy</span>
+							<span th:unless="${!product.sold}">Sold</span>
+						</td>
+
 					</tr>
 				</tbody>
 			</table>

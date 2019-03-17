@@ -55,14 +55,14 @@ public class ProductsController {
 		return "Ok";
 	}
 	
-	@RequestMapping("/product/buy/{idt}")
-	public String buyProduct(@PathVariable Long idt) {
+	@RequestMapping("/product/buy/{id}")
+	public String buyProduct(@PathVariable Long id) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		// String email = securityService.findLoggedInEmail(); // Gets session's user
 		// identifier
 		User buyer = usersService.getUserByEmail(email);
-		Product p = productsService.getProduct(idt);
+		Product p = productsService.getProduct(id);
 		if (productsService.buyProduct(p, buyer)) {
 			return "redirect:/product/list";
 		}
