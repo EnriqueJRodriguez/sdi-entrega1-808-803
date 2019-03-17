@@ -64,7 +64,6 @@ public class ProductsController {
 		} else {
 			products = productsService.getAllProducts(pageable);
 		}
-		products = productsService.getProductsByTitle(pageable, searchText);
 		model.addAttribute("productList", products.getContent());
 		model.addAttribute("page", products);
 //		model.addAttribute("user", user);
