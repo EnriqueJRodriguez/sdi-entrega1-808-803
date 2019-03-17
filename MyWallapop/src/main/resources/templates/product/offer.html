@@ -9,16 +9,18 @@
 
 
 	<div class="container">
-		<h2>My offers</h2>
+		<h2 th:text="#{Products.offer.title}"></h2>
 		<form class="navbar-form" action="/product/purchase">
 			<div class="form-group">
 				<input name="searchText" type="text" class="form-control" size="50"
 					placeholder="Search by the title of the product">
 			</div>
-			<button type="submit" class="btn btn-default">Search</button>
+			<button type="submit" class="btn btn-default"
+				th:text="#{Products.offer.search}"></button>
 		</form>
-		<p>Offers history:</p>
-		<button type="button" id="updateButton" class="btn btn-default">Update</button>
+		<p th:text="#{Products.offer.history}"></p>
+		<button type="button" id="updateButton" class="btn btn-default"
+			th:text="#{Products.offer.update}"></button>
 		<script th:inline="javascript">
  			/*<![CDATA[*/
 	 			$( "#updateButton" ).click(function() {
@@ -36,9 +38,9 @@
 				id="tableOffer">
 				<thead>
 					<tr>
-						<th class="col-md-1">Title</th>
-						<th class="col-md-1">Description</th>
-						<th class="col-md-1">Price</th>
+						<th class="col-md-1" th:text="#{Products.offer.titl}"></th>
+						<th class="col-md-1" th:text="#{Products.offer.description}"></th>
+						<th class="col-md-1" th:text="#{Products.offer.price}"></th>
 						<th class="col-md-1"></th>
 					</tr>
 				</thead>
@@ -47,7 +49,7 @@
 						<td th:text="${product.title}"></td>
 						<td th:text="${product.description}"></td>
 						<td th:text="${product.price}"></td>
-						<td><a th:href="${'/product/remove/' + product.id}">Remove</span></a></td>
+						<td><a th:href="${'/product/remove/' + product.id}" th:text="#{Products.offer.remove}"></span></a></td>
 					</tr>
 				</tbody>
 			</table>

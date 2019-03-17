@@ -9,9 +9,9 @@
 
 
 	<div class="container">
-		<h2>No sufficient founds</h2>
+		<h2 th:text="#{Products.noCash.title}"></h2>
 		<form action="/product/list" class="inline">
-			<button class="float-centre submit-button">Go back</button>
+			<button class="float-centre submit-button" th:text="#{Products.noCash.option}"></button>
 		</form>
 	</div>
 
