@@ -1,12 +1,14 @@
 package com.uniovi.entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Product {
@@ -18,25 +20,41 @@ public class Product {
 	private String description;
 	private Double price;
 	@ManyToOne@JoinColumn(name = "owner_id")
-	private User owner;
+	private User owner = null;
 	private Date date;
 	@ManyToOne@JoinColumn(name = "buyer_id")
-	private User buyer;
+	private User buyer = null;
+	@Type(type= "org.hibernate.type.NumericBooleanType")
+	private boolean sold;
 
-	public Product(Long id,String title, String description, Double price) {
+	public Product(String title, String description, Double price, Date date, User owner) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.price = price;
+		this.date = date;
+		this.owner = owner;
+		this.sold = false;
+	}
+	
+	public Product(String title, String description, Double price, Date date) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.price = price;
+		this.date = date;
+		this.sold = false;
 	}
 
 	public Product() {
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Mark [id=" + id + ", description=" + description + ", price=" + price + "]";
+		return "Product [title=" + title + ", description=" + description + ", price=" + price + ", owner=" + owner
+				+ ", date=" + date + "]";
 	}
 
 	public Long getId() {
@@ -95,8 +113,12 @@ public class Product {
 		this.buyer = buyer;
 	}
 
-	
-	
-	
+	public boolean isSold() {
+		return sold;
+	}
+
+	public void setSold(boolean sold) {
+		this.sold = sold;
+	}
 
 }

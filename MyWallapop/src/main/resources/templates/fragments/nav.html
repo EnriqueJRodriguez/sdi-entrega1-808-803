@@ -10,8 +10,17 @@
 			<img src="/img/logo.png" alt="logo" />
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav navbar-left">
+			<ul class="nav navbar-nav navbar-left" sec:authorize="isAuthenticated()">
 				<li><a href="/product/list">Listar productos</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-left" sec:authorize="isAuthenticated()">
+				<li><a href="/product/purchase">Mis compras</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-left" sec:authorize="isAuthenticated()">
+				<li><a href="/product/offer">Mis ofertas</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-left" sec:authorize="isAuthenticated()">
+				<li><a href="/product/add">Añadir producto</a></li>
 			</ul>
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
 				<li id="users-menu" class="dropdown"

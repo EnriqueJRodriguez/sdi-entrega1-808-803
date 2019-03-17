@@ -1,5 +1,6 @@
 package com.uniovi.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -25,9 +26,10 @@ public class User {
 	private String passwordConfirm;
 	private double balance;
 	@OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
-	private Set<Product> purchases;
+	private Set<Product> purchases = new HashSet<Product>();
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-	private Set<Product> offers;
+	private Set<Product> offers = new HashSet<Product>();
+	
 
 	public User(String email, String name, String lastName, String role) {
 		super();
