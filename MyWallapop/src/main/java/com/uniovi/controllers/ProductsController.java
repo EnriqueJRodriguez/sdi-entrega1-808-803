@@ -75,10 +75,21 @@ public class ProductsController {
 		model.addAttribute("productList", products.getContent());
 		return "product/list :: tableProducts";
 	}
-
+	
+	@RequestMapping("/product/purchase/update")
+	public String updatePurchase(Model model, Pageable pageable, Principal principal) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		Page<Product> products = productsService.getAllPurchases(pageable,email);
+		model.addAttribute("productList", products.getContent());
+		return "product/purchase :: tablePurchase";
+	}
+	
 	@RequestMapping("/product/list")
-	public String getList(Model model, Pageable pageable, Principal principal,
+	public String getPurchase(Model model, Pageable pageable, Principal principal,
 			@RequestParam(value = "", required = false) String searchText) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
 //		String email = principal.getName();
 //		User user = usersService.getUserByEmail(email);
 		Page<Product> products = new PageImpl<Product>(new LinkedList<Product>());
@@ -91,6 +102,26 @@ public class ProductsController {
 		model.addAttribute("page", products);
 //		model.addAttribute("user", user);
 		return "product/list";
+	}
+
+	@RequestMapping("/product/purchase")
+	public String getList(Model model, Pageable pageable, Principal principal,
+			@RequestParam(value = "", required = false) String searchText) {
+//		String email = principal.getName();
+//		User user = usersService.getUserByEmail(email);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User buyer = usersService.getUserByEmail(email);
+		Page<Product> products = new PageImpl<Product>(new LinkedList<Product>());
+		if (searchText != null && !searchText.isEmpty()) {
+			products = productsService.getPurchasesByTitle(pageable, searchText,email);
+		} else {
+			products = productsService.getAllPurchases(pageable,email);
+		}
+		model.addAttribute("productList", products.getContent());
+		model.addAttribute("page", products);
+//		model.addAttribute("user", user);
+		return "product/purchase";
 	}
 
 }

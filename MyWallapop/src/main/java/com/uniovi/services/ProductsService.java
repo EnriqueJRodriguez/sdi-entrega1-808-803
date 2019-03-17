@@ -48,6 +48,10 @@ public class ProductsService {
 		return productsRepository.searchAllProducts(pageable);
 	}
 	
+	public Page<Product> getAllPurchases(Pageable pageable, String email) {
+		return productsRepository.searchAllPurchases(pageable,email);
+	}
+	
 	public Page<Product> getProductsByTitle(Pageable pageable, String searchText) {
 		searchText = "%" + searchText + "%";
 		if (searchText.isEmpty() && searchText != null) {
@@ -57,12 +61,23 @@ public class ProductsService {
 			return productsRepository.searchProductByTitle(pageable, searchText);
 		}
 	}
+	
+	public Page<Product> getPurchasesByTitle(Pageable pageable, String searchText, String email) {
+		searchText = "%" + searchText + "%";
+		if (searchText.isEmpty() && searchText != null) {
+			return getAllPurchases(pageable, email);
+		}
+		else {
+			return productsRepository.searchPurchasesByTitle(pageable, searchText,email);
+		}
+	}
 
 	public boolean buyProduct(Product p, User buyer) {
 		if(p.getPrice() <= buyer.getBalance()) {
 			p.getOwner().setBalance(p.getOwner().getBalance() + p.getPrice());
 			buyer.setBalance(buyer.getBalance() - p.getPrice());
 			buyer.getPurchases().add(p);
+			p.setBuyer(buyer);
 			p.setSold(true);
 			productsRepository.save(p);
 			usersRepository.save(buyer);
