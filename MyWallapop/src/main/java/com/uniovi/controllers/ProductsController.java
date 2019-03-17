@@ -3,7 +3,6 @@ package com.uniovi.controllers;
 import java.security.Principal;
 import java.util.LinkedList;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uniovi.entities.Product;
 import com.uniovi.entities.User;
 import com.uniovi.services.ProductsService;
-import com.uniovi.services.SecurityService;
 import com.uniovi.services.UserService;
+import com.uniovi.validator.ProductValidator;
 
 @Controller
 public class ProductsController {
@@ -36,12 +37,24 @@ public class ProductsController {
 	private UserService usersService;
 	
 	@Autowired
-	private SecurityService securityService;
+	private ProductValidator productValidator;
+	
+	@RequestMapping(value = "/product/add", method = RequestMethod.GET)
+	public String signup(Model model) {
+		model.addAttribute("product", new Product());
+		return "product/add";
+	}
 
 	@RequestMapping(value = "/product/add", method = RequestMethod.POST)
-	public String setProduct(@ModelAttribute Product product) {
-		productsService.addProduct(product);
-		return "Ok";
+	public String addProduct(@Validated Product product, BindingResult result) {
+		productValidator.validate(product, result);
+		if (result.hasErrors()) {
+			return "product/add";
+		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		productsService.addProduct(product,email);
+		return "redirect:/product/offer";
 	}
 
 	@RequestMapping("/product/remove/{id}")

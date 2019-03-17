@@ -68,23 +68,23 @@ public class InsertSampleDataService {
 		usersService.addUser(user5);
 		usersService.addUser(user6);
 		
-		productsService.addProduct(pr1);
-		productsService.addProduct(pr2);
-		productsService.addProduct(pr3);
-		productsService.addProduct(pr4);
-		productsService.addProduct(pr5);
-		productsService.addProduct(pr6);
-		productsService.addProduct(pr7);
-		productsService.addProduct(pr8);
-		productsService.addProduct(pr9);
-		productsService.addProduct(pr10);
-		productsService.addProduct(pr12);
-		productsService.addProduct(pr13);
-		productsService.addProduct(pr14);
-		productsService.addProduct(pr15);
-		productsService.addProduct(pr16);
-		productsService.addProduct(pr17);
-		productsService.addProduct(pr18);
-		productsService.addProduct(pr19);
+		productsService.addProduct(pr1,user1.getEmail());
+		productsService.addProduct(pr2,user1.getEmail());
+		productsService.addProduct(pr3,user1.getEmail());
+		productsService.addProduct(pr4,user1.getEmail());
+		productsService.addProduct(pr5,user1.getEmail());
+		productsService.addProduct(pr6,user1.getEmail());
+		productsService.addProduct(pr7,user1.getEmail());
+		productsService.addProduct(pr8,user1.getEmail());
+		productsService.addProduct(pr9,user1.getEmail());
+		productsService.addProduct(pr10,user1.getEmail());
+		productsService.addProduct(pr12,user1.getEmail());
+		productsService.addProduct(pr13,user1.getEmail());
+		productsService.addProduct(pr14,user1.getEmail());
+		productsService.addProduct(pr15,user1.getEmail());
+		productsService.addProduct(pr16,user1.getEmail());
+		productsService.addProduct(pr17,user1.getEmail());
+		productsService.addProduct(pr18,user1.getEmail());
+		productsService.addProduct(pr19,user1.getEmail());
 	}
 }

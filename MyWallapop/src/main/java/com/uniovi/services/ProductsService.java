@@ -1,13 +1,11 @@
 package com.uniovi.services;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +22,7 @@ public class ProductsService {
 	
 	@Autowired
 	private UserRepository usersRepository;
-
+	
 	public List<Product> getProducts() {
 		List<Product> products = new ArrayList<Product>();
 		productsRepository.findAll().forEach(products::add);
@@ -35,13 +33,22 @@ public class ProductsService {
 		return productsRepository.findById(id).get();
 	}
 
-	public void addProduct(Product product) {
+	public void addProduct(Product product, String email) {
 		// If the id is null we assign the last +1 position on the list
+		if(product.getDate() == null) {
+			product.setDate(new Date());
+		}
+		User u = usersRepository.findByEmail(email);
+		u.getOffers().add(product);
+		usersRepository.save(u);
 		productsRepository.save(product);
 	}
 
 	public void deleteProduct(Long id, String email) {
 		if(getProduct(id).getOwner().getEmail().equals(email)) {
+			User u = usersRepository.findByEmail(email);
+			u.getOffers().remove(getProduct(id));
+			usersRepository.save(u);
 			productsRepository.deleteById(id);
 		}
 	}

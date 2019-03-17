@@ -1,5 +1,6 @@
 package com.uniovi.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.uniovi.services.RolesService;
 
 @Entity
 public class User {
@@ -25,9 +30,12 @@ public class User {
 	private String passwordConfirm;
 	private double balance;
 	@OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
-	private Set<Product> purchases;
+	private Set<Product> purchases = new HashSet<Product>();
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-	private Set<Product> offers;
+	private Set<Product> offers = new HashSet<Product>();
+	
+	@Autowired
+	private RolesService rolesService;
 
 	public User(String email, String name, String lastName, String role) {
 		super();
@@ -35,6 +43,9 @@ public class User {
 		this.name = name;
 		this.lastName = lastName;
 		this.role = role;
+		this.offers = new HashSet<Product>();
+		this.purchases = new HashSet<Product>();
+		setRole(rolesService.getRoles()[0]);
 	}
 
 	public User(String email, String name, String lastName) {
@@ -43,6 +54,9 @@ public class User {
 		this.name = name;
 		this.lastName = lastName;
 		this.balance = 0.0;
+		this.offers = new HashSet<Product>();
+		this.purchases = new HashSet<Product>();
+		setRole(rolesService.getRoles()[0]);
 	}
 
 	public User() {

@@ -20,10 +20,10 @@ public class Product {
 	private String description;
 	private Double price;
 	@ManyToOne@JoinColumn(name = "owner_id")
-	private User owner;
+	private User owner = null;
 	private Date date;
 	@ManyToOne@JoinColumn(name = "buyer_id")
-	private User buyer;
+	private User buyer = null;
 	@Type(type= "org.hibernate.type.NumericBooleanType")
 	private boolean sold;
 
