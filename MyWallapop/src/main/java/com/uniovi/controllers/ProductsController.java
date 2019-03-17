@@ -42,14 +42,14 @@ public class ProductsController {
 	@RequestMapping(value = "/product/add", method = RequestMethod.GET)
 	public String addProduct(Model model) {
 		model.addAttribute("product", new Product());
-		return "/product/add";
+		return "product/add";
 	}
 
 	@RequestMapping(value = "/product/add", method = RequestMethod.POST)
 	public String addProduct(@Validated Product product, BindingResult result) {
 		productValidator.validate(product, result);
 		if (result.hasErrors()) {
-			return "/product/add";
+			return "product/add";
 		}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();

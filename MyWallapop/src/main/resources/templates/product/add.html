@@ -5,31 +5,31 @@
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2 th:text="Add new offer"></h2>
+		<h2 th:text="#{User.add.title.main}"></h2>
 		<form class="form-horizontal" method="post" action="/product/add">
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="title" th:text="Title:"></label>
+				<label class="control-label col-sm-2" for="title" th:text="#{Product.add.title}"></label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="title"
 						placeholder="My product" required="true" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="description" th:text="Description:"></label>
+				<label class="control-label col-sm-2" for="description" th:text="#{Product.add.description}"></label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="description"
 						placeholder="Description" required="true" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="price" th:text="Price:"></label>
+				<label class="control-label col-sm-2" for="price" th:text="#{Product.add.price}"></label>
 				<div class="col-sm-10">
 					<input type="number" step="0.01" min="0.01". class="form-control" name="price"
 						placeholder="20.0" required="true" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="date" th:text="Date:"></label>
+				<label class="control-label col-sm-2" for="date" th:text="#{Product.add.date}"></label>
 				<div class="col-sm-10">
 					<input type="datetime" class="form-control" name="date"
 						placeholder="Date" />
@@ -37,7 +37,7 @@
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary" th:text="Send"></button>
+					<button type="submit" class="btn btn-primary" th:text="#{Product.add.send}"></button>
 				</div>
 			</div>
 		</form>
