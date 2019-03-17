@@ -14,12 +14,16 @@ import org.springframework.stereotype.Service;
 import com.uniovi.entities.Product;
 import com.uniovi.entities.User;
 import com.uniovi.repositories.ProductsRepository;
+import com.uniovi.repositories.UserRepository;
 
 @Service
 public class ProductsService {
 
 	@Autowired
 	private ProductsRepository productsRepository;
+	
+	@Autowired
+	private UserRepository usersRepository;
 
 	public List<Product> getProducts() {
 		List<Product> products = new ArrayList<Product>();
@@ -60,6 +64,9 @@ public class ProductsService {
 			buyer.setBalance(buyer.getBalance() - p.getPrice());
 			buyer.getPurchases().add(p);
 			p.setSold(true);
+			productsRepository.save(p);
+			usersRepository.save(buyer);
+			usersRepository.save(p.getOwner());
 			return true;
 		}
 		return false;
