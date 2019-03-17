@@ -19,9 +19,9 @@ public class ProductValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Product product = (Product) target;
 		// None of the fields is empty
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "Error.signup.email.empty");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "Error.signup.name.empty");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "Error.signup.lastName.empty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "Error.add.title.empty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "Error.add.description.empty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "Error.add.price.empty");
 
 		// Check the requirements for the various fields
 		checkTitle(product, errors);
@@ -38,13 +38,13 @@ public class ProductValidator implements Validator {
 
 	private void checkDescription(Product product, Errors errors) {
 		if (product.getDescription().length() < 5 || product.getDescription().length() > 24) {
-			errors.rejectValue("email", "Error.add.description");
+			errors.rejectValue("description", "Error.add.description");
 		}
 	}
 
 	private void checkPrice(Product product, Errors errors) {
 		if (product.getPrice() <= 0.01) {
-			errors.rejectValue("email", "Error.add.price");
+			errors.rejectValue("price", "Error.add.price");
 		}
 	}
 }
