@@ -61,5 +61,9 @@ public class PO_HomeView extends PO_View {
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "ListMyOffers", getTimeout());
 		elementos.get(0).click();
 	}
+	public static void seeOffers(WebDriver driver) {
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", "listProducts", getTimeout());
+		elementos.get(0).click();
+	}
 	
 }

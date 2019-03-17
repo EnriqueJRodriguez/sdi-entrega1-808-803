@@ -1,5 +1,6 @@
 package com.uniovi.tests;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.After;
@@ -15,6 +16,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.uniovi.tests.pageobject.PO_HomeView;
 import com.uniovi.tests.pageobject.PO_LoginView;
+import com.uniovi.tests.pageobject.PO_OfferView;
 import com.uniovi.tests.pageobject.PO_Properties;
 import com.uniovi.tests.pageobject.PO_SignupView;
 import com.uniovi.tests.pageobject.PO_UsersView;
@@ -192,16 +194,53 @@ public class Tests {
 		try {
 			PO_HomeView.checkKey(driver, "Offer.raid", PO_Properties.getSPANISH());
 			fail();
-		}catch(TimeoutException e) {
-			
+		} catch (TimeoutException e) {
+
 		}
-		enlace = By.xpath("//td[contains(text(), 'Servidor de nombres')]/following-­sibling::*[3]");
+		enlace = By.xpath("//td[contains(text(), 'Servidor de nombres')]//following-sibling::*[3]");
 		driver.findElement(enlace).click();
 		try {
 			PO_HomeView.checkKey(driver, "Offer.names", PO_Properties.getSPANISH());
+		} catch (TimeoutException e) {
+
+		}
+	}
+
+	@Test
+	public void PF09() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "ja@uniovi.es", "123456");
+		PO_HomeView.seeOffers(driver);
+		PO_OfferView.search(driver, "");
+		assertTrue(PO_OfferView.getElements(driver) > 0);
+		PO_OfferView.search(driver, "somier");
+		try {
+		PO_OfferView.getElements(driver);
+		fail();
 		}catch(TimeoutException e) {
 			
 		}
+
 	}
+	
+	@Test
+	public void PF10() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "ja@uniovi.es", "123456");
+		PO_HomeView.seeOffers(driver);
+		PO_OfferView.search(driver, "Coche");
+		By enlace = By.xpath("//td[contains(text(), 'RAID de sobremesa')]/following-sibling::*[]");
+		driver.findElement(enlace).click();
+		PO_OfferView.search(driver, "somier");
+		try {
+		PO_OfferView.getElements(driver);
+		fail();
+		}catch(TimeoutException e) {
+			
+		}
+
+	}
+	
+	
 
 }
