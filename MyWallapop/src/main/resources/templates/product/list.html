@@ -1,20 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
 <head th:replace="fragments/head" />
 <body>
+
+	<nav th:replace="fragments/nav" />
+
+
+
 	<div class="container">
-		<h1>List Products</h1>
-		<div th:each="product : ${productList}">
-			<p>
-				<span th:text="${product.id}"></span> <span
-					th:text="${product.description}"></span> <span
-					th:text="${product.price}"></span> <a
-					th:href="${'/product/details/' + product.id}">details</a> <a
-					th:href="${'/product/delete/' + product.id}">delete</a>
-			</p>
+		<h2>Products</h2>
+		<form class="navbar-form" action="/product/list">
+			<div class="form-group">
+				<input name="searchText" type="text" class="form-control" size="50"
+					placeholder="Search by the title of the product">
+			</div>
+			<button type="submit" class="btn btn-default">Search</button>
+		</form>
+		<p>Current products available on the system:</p>
+		<button type="button" id="updateButton" class="btn btn-default">Update</button>
+		<script th:inline="javascript">
+ 			/*<![CDATA[*/
+	 			$( "#updateButton" ).click(function() {
+ 					var numberPage = [[${param.page}]];
+ 					var urlUpdate = '/product/list/update';
+ 					if (numberPage != null ){
+ 						urlUpdate += "?page="+numberPage[0];
+ 					}
+ 					$("#tableProducts").load(urlUpdate);
+ 				});
+ 				/*]]>*/
+ 		</script>
+		<div class="table-responsive">
+			<table class="table table-hover" th:fragment="tableProducts"
+				id="tableProducts">
+				<thead>
+					<tr>
+						<th class="col-md-1">Id</th>
+						<th class="col-md-1">Title</th>
+						<th class="col-md-1">Description</th>
+						<th class="col-md-1">Price</th>
+						<th class="col-md-1">Date</th>
+						<th class="col-md-1">User</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="product : ${productList}">
+						<td th:text="${product.id}"></td>
+						<td th:text="${product.title}"></td>
+						<td th:text="${product.description}"></td>
+						<td th:text="${product.price}"></td>
+						<td th:text="${product.date}"></td>
+						<td th:text="${product.owner.email}"></td>
+				</tbody>
+			</table>
 		</div>
-		<div th:if="${#lists.isEmpty(productList)}">No products</div>
+		<footer th:replace="fragments/pagination" />
 	</div>
+
 	<footer th:replace="fragments/footer" />
 </body>
 </html>

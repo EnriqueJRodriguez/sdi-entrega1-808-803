@@ -1,6 +1,6 @@
 package com.uniovi.entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,20 +23,24 @@ public class Product {
 	@ManyToOne@JoinColumn(name = "buyer_id")
 	private User buyer;
 
-	public Product(Long id,String title, String description, Double price) {
+	public Product(String title, String description, Double price, Date date, User owner) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.price = price;
+		this.date = date;
+		this.owner = owner;
 	}
 
 	public Product() {
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Mark [id=" + id + ", description=" + description + ", price=" + price + "]";
+		return "Product [title=" + title + ", description=" + description + ", price=" + price + ", owner=" + owner
+				+ ", date=" + date + "]";
 	}
 
 	public Long getId() {
