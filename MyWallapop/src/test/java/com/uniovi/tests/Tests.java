@@ -59,20 +59,20 @@ public class Tests {
 		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
 		// tests with empty fields
 		PO_SignupView.fillForm(driver, "", "Josefo", "Perez", "77777", "77777");
-		PO_SignupView.checkKey(driver, "Error.signup.email.empty", PO_Properties.getENGLISH());
+		PO_SignupView.checkKey(driver, "Error.signup.email.empty", PO_Properties.getSPANISH());
 		PO_SignupView.fillForm(driver, "jos3f0@educastur.princast.es", "", "Perez", "77777", "77777");
-		PO_SignupView.checkKey(driver, "Error.signup.name.empty", PO_Properties.getENGLISH());
+		PO_SignupView.checkKey(driver, "Error.signup.name.empty", PO_Properties.getSPANISH());
 		PO_SignupView.fillForm(driver, "jos3f0@educastur.princast.es", "Josefo", "", "77777", "77777");
-		PO_SignupView.checkKey(driver, "Error.signup.lastName.empty", PO_Properties.getENGLISH());
+		PO_SignupView.checkKey(driver, "Error.signup.lastName.empty", PO_Properties.getSPANISH());
 		// Check the password not repeated correctly
 		PO_SignupView.fillForm(driver, "jos3f0@educastur.princast.es", "Josefo", "Perez", "77777", "77776");
-		PO_SignupView.checkKey(driver, "Error.signup.password.confirm", PO_Properties.getENGLISH());
+		PO_SignupView.checkKey(driver, "Error.signup.password.confirm", PO_Properties.getSPANISH());
 
 		// Rellenamosel formulario.
 		PO_SignupView.fillForm(driver, "admin@email.com", "Josefo", "Perez", "77777", "77777");
 		PO_View.getP();
 		// COmprobamos el error de email repetido.
-		PO_SignupView.checkKey(driver, "Error.signup.email.duplicate", PO_Properties.getENGLISH());
+		PO_SignupView.checkKey(driver, "Error.signup.email.duplicate", PO_Properties.getSPANISH());
 	}
 
 	@Test
@@ -80,7 +80,7 @@ public class Tests {
 		// Correct login for admin
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "admin@email.com", "123456");
-		PO_HomeView.checkKey(driver, "Menu.users", PO_Properties.getENGLISH());
+		PO_HomeView.checkKey(driver, "Menu.users", PO_Properties.getSPANISH());
 		// Correct login for normal user
 		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
@@ -125,12 +125,12 @@ public class Tests {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "admin@email.com", "123456");
 		PO_HomeView.listUsers(driver);
-		PO_HomeView.checkKey(driver, "User.1", PO_Properties.getENGLISH());
-		PO_HomeView.checkKey(driver, "User.2", PO_Properties.getENGLISH());
-		PO_HomeView.checkKey(driver, "User.3", PO_Properties.getENGLISH());
-		PO_HomeView.checkKey(driver, "User.4", PO_Properties.getENGLISH());
-		PO_HomeView.checkKey(driver, "User.5", PO_Properties.getENGLISH());
-		PO_HomeView.checkKey(driver, "User.6", PO_Properties.getENGLISH());
+		PO_HomeView.checkKey(driver, "User.1", PO_Properties.getSPANISH());
+		PO_HomeView.checkKey(driver, "User.2", PO_Properties.getSPANISH());
+		PO_HomeView.checkKey(driver, "User.3", PO_Properties.getSPANISH());
+		PO_HomeView.checkKey(driver, "User.4", PO_Properties.getSPANISH());
+		PO_HomeView.checkKey(driver, "User.5", PO_Properties.getSPANISH());
+		PO_HomeView.checkKey(driver, "User.6", PO_Properties.getSPANISH());
 	}
 
 	@Test
@@ -141,15 +141,15 @@ public class Tests {
 		String[] users = { "users1" };
 		PO_UsersView.fillForm(driver, users);
 		try {
-			PO_HomeView.checkKey(driver, "User.1", PO_Properties.getENGLISH());
+			PO_HomeView.checkKey(driver, "User.1", PO_Properties.getSPANISH());
 		} catch (TimeoutException e) {
 
 		}
 
-		users[0] = "users5";
+		users[0] = "users10";
 		PO_UsersView.fillForm(driver, users);
 		try {
-			PO_HomeView.checkKey(driver, "User.6", PO_Properties.getENGLISH());
+			PO_HomeView.checkKey(driver, "User.10", PO_Properties.getSPANISH());
 		} catch (TimeoutException e) {
 
 		}
@@ -157,12 +157,17 @@ public class Tests {
 		String[] users2 = { "users1", "users2", "users3" };
 		PO_UsersView.fillForm(driver, users2);
 		try {
-			PO_HomeView.checkKey(driver, "User.2", PO_Properties.getENGLISH());
-			PO_HomeView.checkKey(driver, "User.3", PO_Properties.getENGLISH());
-			PO_HomeView.checkKey(driver, "User.4", PO_Properties.getENGLISH());
+			PO_HomeView.checkKey(driver, "User.2", PO_Properties.getSPANISH());
+			PO_HomeView.checkKey(driver, "User.3", PO_Properties.getSPANISH());
+			PO_HomeView.checkKey(driver, "User.4", PO_Properties.getSPANISH());
 		} catch (TimeoutException e) {
 
 		}
+	}
+	
+	@Test
+	public void PF06() {
+		
 	}
 
 }

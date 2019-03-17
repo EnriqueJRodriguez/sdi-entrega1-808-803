@@ -22,6 +22,22 @@ public class InsertSampleDataService {
 
 	@PostConstruct
 	public void init() {
+		User dummy1 = new User("antonio@uniovi.es", "Antonio", "Pérez");
+		dummy1.setPassword("123456");
+		dummy1.setRole(rolesService.getRoles()[0]);
+		User dummy2 = new User("federico@uniovi.es", "Federico", "Los Santos");
+		dummy2.setPassword("123456");
+		dummy2.setRole(rolesService.getRoles()[0]);
+		User dummy3 = new User("santi@uniovi.es", "Santiago", "Abascal");
+		dummy3.setPassword("123456");
+		dummy3.setRole(rolesService.getRoles()[0]);
+		User dummy4 = new User("mrajoy@uniovi.es", "Mariano", "Rajoy");
+		dummy4.setPassword("123456");
+		dummy4.setRole(rolesService.getRoles()[0]);
+		User dummy5 = new User("psachez@uniovi.es", "Pedro", "Sanchez");
+		dummy5.setPassword("123456");
+		dummy5.setRole(rolesService.getRoles()[0]);
+		
 		User user1 = new User("UO12345@uniovi.es", "Pedro", "Díaz");
 		user1.setPassword("123456");
 		user1.setRole(rolesService.getRoles()[0]);
@@ -61,12 +77,16 @@ public class InsertSampleDataService {
 		Product pr18 = new Product("Grincho vaporico","Grincho sabor silent hill", 3.5, new Date());
 		Product pr19 = new Product("Grincho vaporico","Grincho sabor hipster", 3.5, new Date());
 		
+		usersService.addUser(dummy1);
+		usersService.addUser(dummy2);
+		usersService.addUser(dummy3);
+		usersService.addUser(dummy4);
+		usersService.addUser(user5);
 		usersService.addUser(user1);
 		usersService.addUser(user2);
 		usersService.addUser(user3);
 		usersService.addUser(user4);
-		usersService.addUser(user5);
-		usersService.addUser(user6);
+		usersService.addUser(dummy5);
 		
 		productsService.addProduct(pr1,user1);
 		productsService.addProduct(pr2,user1);
